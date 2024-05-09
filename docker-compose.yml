@@ -1,4 +1,9 @@
 version: '3.4'
+
+networks:
+  fedd_it:
+    driver: bridge
+
 services:
   db:
     image: postgres:15
@@ -13,6 +18,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - fedd_it
   feddit:
     image: chasingcars/feddit:latest
     entrypoint: >
@@ -21,6 +28,8 @@ services:
       SQLALCHEMY_DATABASE_URI: "postgresql://postgres:mysecretpassword@db:5432/postgres"
     ports:
       - "8080:8080"
+    expose:
+      - 8080
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/version"]
       interval: 1m30s
@@ -28,5 +37,26 @@ services:
       retries: 3
     links:
       - "db:db"
+    networks:
+      - fedd_it
     depends_on:
       - db
+  polarity_check:
+    build:
+      context: ./polarity_check
+      dockerfile: Dockerfile
+    container_name: "polarity_check"
+    ports:
+      - "5050:5050"
+    expose:
+      - 5050
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://0.0.0.0:5050/health_check" ]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - fedd_it
+    depends_on:
+      - db
+      - feddit
