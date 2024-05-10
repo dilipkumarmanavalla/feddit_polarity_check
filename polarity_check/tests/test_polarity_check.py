@@ -44,7 +44,7 @@ def test_get_comments():
             class T:status_code = 500
             response = T
         if response.status_code == 200:
-            main.feddit_url = f"http://{each_host}:8080"
+            main.FEDDIT_URL = f"http://{each_host}:8080"
             response = client.get("/comments", params={"subfeddit_id": "1"})
             assert response.status_code == 200
             data = response.json()
@@ -52,7 +52,7 @@ def test_get_comments():
             assert len(data["comments"]) == 25
             continue
 
-    main.feddit_url = "http://test_500:8080/api/v1"
+    main.FEDDIT_URL = "http://test_500:8080/api/v1"
     response = client.get("/comments", params={"subfeddit_id": "1"})
     assert response.status_code == 500
     print('server is not available')

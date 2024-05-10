@@ -11,7 +11,7 @@ sia = SentimentIntensityAnalyzer()
 
 app = FastAPI()
 
-feddit_url = "http://feddit:8080"
+FEDDIT_URL = "http://feddit:8080"
 
 # Endpoint to retrieve comments from Feddit
 @app.get("/comments")
@@ -30,7 +30,7 @@ async def get_comments(
     }
     try:
         response = requests.get(
-            f"{feddit_url}/api/v1/comments",
+            f"{FEDDIT_URL}/api/v1/comments",
             params=params,
             timeout=10
         )
