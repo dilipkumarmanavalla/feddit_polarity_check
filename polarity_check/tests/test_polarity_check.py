@@ -1,4 +1,10 @@
 from fastapi.testclient import TestClient
+import sys
+import os
+
+app_module_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'app'))
+sys.path.append(app_module_dir)
+
 from app import main
 import requests
 
