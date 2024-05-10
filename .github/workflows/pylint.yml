@@ -6,6 +6,7 @@ on:
       - main
 jobs:
   test:
+    name: Running Pylint Checks
     runs-on: ubuntu-latest
     strategy:
       matrix:
