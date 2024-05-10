@@ -1,0 +1,38 @@
+[MASTER]
+
+# Specify a configuration file
+rcfile=
+
+# Python code to execute, usually for sys.path manipulation such as
+# pydevd.settrace('127.0.0.1', port=12345, stdoutToServer=True, stderrToServer=True)
+init-hook=
+
+# Ignore errors and warnings. Ignore specific error types or messages
+# in a comma separated list or through regular expressions? [OTHERS]
+
+# List of plugins (as comma separated values of python module names) to load,
+# usually to register additional checkers.
+load-plugins=
+
+[MESSAGES CONTROL]
+
+# Disable pylint errors and warnings based on the provided logs
+disable=E0401, R0913, E0611, R0903, W0702, W3101, C0115, C0321, C0411, C0413
+
+[REPORTS]
+
+# Set the output format. Available formats are text, parseable, colorized, msvs
+output-format=text
+
+# File containing messages. Default is disabled, use '-o pylint.out' to activate.
+reports=no
+
+[LOGGING]
+
+# Logging modules to check
+logging-modules=
+
+[DIRECTORIES]
+
+# List of comma separated files or directories to load python files from.
+init-hook=
