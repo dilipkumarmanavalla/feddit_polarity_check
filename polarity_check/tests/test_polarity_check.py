@@ -28,7 +28,7 @@ def test_analyse_and_generate_polarity():
 
 
 def test_get_comments():
-    hosts = ['0.0.0.0', 'localhost']
+    hosts = ['0.0.0.0', 'localhost', 'feddit']
     for each_host in hosts:
         FEDDIT_URL = f"http://{each_host}:8080/api/v1"
         try:
