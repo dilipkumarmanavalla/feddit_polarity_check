@@ -25,7 +25,8 @@ jobs:
         pip install -r requirements.txt
     - name: Running the UnitTest Cases
       run: |
-           python -m pytest tests
+           cd polarity_check
+           python -m pytest .\tests
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
