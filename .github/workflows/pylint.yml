@@ -26,7 +26,7 @@ jobs:
     - name: Running the UnitTest Cases
       run: |
            cd polarity_check
-           python -m pytest .\tests
+           pytest ./tests
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
