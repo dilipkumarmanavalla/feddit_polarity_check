@@ -2,7 +2,7 @@
 Main module for the Polarity Check API
 """
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException
 from models import Comment  # Importing Comment model from models module
 import requests
 from nltk.sentiment import SentimentIntensityAnalyzer
