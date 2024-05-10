@@ -13,7 +13,6 @@ app = FastAPI()
 
 FEDDIT_URL = "http://feddit:8080"
 
-# Endpoint to retrieve comments from Feddit
 @app.get("/comments")
 async def get_comments(
     subfeddit_id: str,
@@ -23,6 +22,16 @@ async def get_comments(
     end_time: int = None,
     sort_by_score: bool = False,
 ):
+    """
+    Endpoint to retrieve comments from Feddit and Respond with polarity added comments
+    :param subfeddit_id:
+    :param skip: no of stepping of comments form an subfeddit
+    :param limit: no of comments required from an subfeddit
+    :param start_time: sort comments by start_time
+    :param end_time: sort comments by end_time
+    :param sort_by_score: sort comments by score
+    :return: list of all comments with added polarity
+    """
     params = {
         "subfeddit_id": subfeddit_id,
         "skip": skip,
@@ -63,8 +72,13 @@ async def get_comments(
 
     return response
 
-# Function to perform Sentiment Analysis and generate polarity score for comments
 def analyse_and_generate_polarity(comments):
+    """
+    Function to perform Sentiment Analysis and generate polarity score for comments
+
+    :param comments: all the comments of a subfeddit
+    :return: updated comments with polarity and polarity_score
+    """
     updated_comments = []
     for i in comments:
         temp_dict = dict(i)
@@ -80,7 +94,10 @@ def analyse_and_generate_polarity(comments):
         updated_comments.append(temp_dict)
     return updated_comments
 
-# Endpoint for health check
 @app.get("/health_check")
 async def health_check():
+    """
+    Endpoint for health check of service
+    :return: staus of api
+    """
     return {"Status": 'Up'}
