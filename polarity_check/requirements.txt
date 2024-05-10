@@ -1,5 +1,6 @@
 fastapi==0.94.0
 pytest
+pylint
 httpx
 pydantic
 uvicorn[standard]==0.20.0
