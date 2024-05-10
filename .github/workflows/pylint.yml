@@ -6,7 +6,7 @@ on:
       - main
 jobs:
   test:
-    name: Running Pylint Checks
+    name: Running Pytest and Pylint Checks
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,6 +22,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint 
         pip install -r polarity_check/requirements.txt
+    - name: Running the UnitTest Cases
+      run: |
+           python -m pytest polarity_check/tests
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
