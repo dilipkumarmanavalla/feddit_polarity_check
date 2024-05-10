@@ -19,12 +19,14 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        cd polarity_check
         python -m pip install --upgrade pip
         pip install pylint 
-        pip install -r polarity_check/requirements.txt
+        pip install -r requirements.txt
     - name: Running the UnitTest Cases
       run: |
-           python -m pytest polarity_check/tests
+           cd polarity_check
+           pytest ./tests
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
