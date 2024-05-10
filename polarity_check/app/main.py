@@ -1,4 +1,8 @@
-from fastapi import FastAPI, HTTPException, Query
+"""
+Main module for the Polarity Check api.
+"""
+
+from fastapi import FastAPI, HTTPException
 from app.models import Comment  # Importing Comment model from models module
 import requests
 from nltk.sentiment import SentimentIntensityAnalyzer
@@ -42,7 +46,8 @@ async def get_comments(
         response.raise_for_status()
         response = dict(response.json())
     except requests.RequestException as e:
-        raise HTTPException(status_code=500, detail=f"Error retrieving comments from Feddit: {e}") from e
+        msg = 'Error retrieving comments from Feddit'
+        raise HTTPException(status_code=500, detail=f"{msg}: {e}") from e
 
     if len(response['comments']) > 0:
         comments = response['comments']
