@@ -33,5 +33,5 @@ jobs:
 
       - name: Analysing the code with pylint
         run: |
-          cd polarity_check
-          pylint --rcfile=.pylintrc $(git ls-files '*.py') app
+          pylint $(git ls-files '*.py')
+          
